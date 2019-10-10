@@ -4,7 +4,7 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    values: []
+    posts: []
 
   }
 
@@ -12,7 +12,7 @@ class App extends React.Component {
     axios.get('http://localhost:5000/api/values')
     .then((response) => {
       this.setState({
-        values: response.data
+        posts: response.data
 
       })
 
@@ -24,18 +24,31 @@ class App extends React.Component {
   }
 
   render() {
+    const { posts } = this.state;
+
     return (
-    <div className="App">
-      <header className="App-header">
-        BlogBox
+      <div className="App">
+        <header className="App-header">
+          BlogBox
 
-      </header>
+        </header>
 
-      {this.state.values.map((value: any) => <div key={value}>{value}</div>)}
+        <main>
+          {posts.map((value: any) => 
+            <div key={post.id}>
+              <h1>{posts.title}</h1>
+              <p>{posts.body}</p>
+              
+            </div>
 
-    </div>
+          )}
 
-  );}
+        </main>
+
+      </div>
+
+    );
+  }
 
 }
 
