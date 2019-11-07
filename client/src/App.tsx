@@ -1,15 +1,19 @@
 import React from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PostList from './components/PostList/PostList';
+import Post from './components/Post/Post';
 import './App.css';
 
 class App extends React.Component {
   state = {
-    posts: []
+    posts: [],
+    post: null
 
   }
 
   componentWillMount() {
-    axios.get('http://localhost:5000/api/values')
+    axios.get('http://localhost:5000/api/posts')
     .then((response) => {
       this.setState({
         posts: response.data
@@ -17,9 +21,18 @@ class App extends React.Component {
       })
 
     }) .catch((error) => {
-      console.error('Error fetching data: ${error}')
+      console.error(`Error fetching data: ${error}`)
 
     })
+
+  }
+
+  viewPost = (post) => {
+    console.log(`view ${post.title}`);
+    this.setState({
+      post: post
+
+    });
 
   }
 
@@ -27,25 +40,31 @@ class App extends React.Component {
     const { posts } = this.state;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          BlogBox
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            BlogBox
 
-        </header>
+          </header>
 
-        <main>
-          {posts.map((value: any) => 
-            <div key={post.id}>
-              <h1>{posts.title}</h1>
-              <p>{posts.body}</p>
-              
-            </div>
+          <main className="App-content">
+            <Switch>
+              <Route exact path="/">
+                <PostList posts={posts} clickPost={this.viewPost}/>
 
-          )}
+              </Route>
 
-        </main>
+              <Route path="/posts/:postId">
+                <Post post={post}/>
 
-      </div>
+              </Route>
+
+            </Switch>
+
+          </main>
+
+        </div>
+      </Router>
 
     );
   }
