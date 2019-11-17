@@ -16,13 +16,19 @@ const PostListItem = props => {
     }
 
     return (
-        <div className="postListItem" onClick={() => handleClickPost(post)}>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
+        <div>
+            <div className="postListItem" onClick={() => handleClickPost(post)}>
+                <h2>{post.title}</h2>
+                <p>{post.body}</p>
+            </div>
+
+            <div className="postControls">
+                <button onClick={() => deletePost(post)}>Delete</button>
+            </div>
         </div>
 
-    )
+    );
 
-}
+};
 
 export default PostListItem;
