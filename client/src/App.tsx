@@ -69,7 +69,10 @@ class App extends React.Component {
           <main className="App-content">
             <Switch>
               <Route exact path="/">
-                <PostList posts={posts} clickPost={this.viewPost}/>
+                <PostList
+                  posts={posts}
+                  clickPost={this.viewPost}
+                />
 
               </Route>
 
@@ -83,7 +86,6 @@ class App extends React.Component {
                   posts={posts}
                   clickPost={this.viewPost}
                   deletePost={this.deletePost}
-
                 />
 
               </Route>
@@ -93,6 +95,7 @@ class App extends React.Component {
           </main>
 
         </div>
+        
       </Router>
 
     );
