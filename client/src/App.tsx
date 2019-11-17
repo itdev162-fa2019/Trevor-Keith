@@ -27,6 +27,15 @@ class App extends React.Component {
 
   }
 
+  viewPost = (post) => {
+    console.log(`view ${post.title}`);
+    this.setState({
+      post: post
+
+    });
+
+  }
+
   deletePost = post => {
     axios
       .delete(`http://localhost:5000/api/posts/${post.id}`)
@@ -43,15 +52,6 @@ class App extends React.Component {
         console.error(`Error deleting post: ${error}`);
 
       });
-
-  };
-
-  viewPost = (post) => {
-    console.log(`view ${post.title}`);
-    this.setState({
-      post: post
-
-    });
 
   }
 
@@ -72,21 +72,13 @@ class App extends React.Component {
                 <PostList
                   posts={posts}
                   clickPost={this.viewPost}
+                  deletePost={this.deletePost}
                 />
 
               </Route>
 
               <Route path="/posts/:postId">
                 <Post post={post}/>
-
-              </Route>
-
-              <Route exact path ="/">
-                <PostList 
-                  posts={posts}
-                  clickPost={this.viewPost}
-                  deletePost={this.deletePost}
-                />
 
               </Route>
 
