@@ -63,7 +63,8 @@ const CreatePost = ({ onPostCreated }) => {
                 history.push('/');
 
             } catch(error) {
-                console.error(`Error creating post: ${error.response.data}`);
+                console.log(error);
+                //console.error(`Error creating post: ${error.response.data}`);
 
             }
 
@@ -78,7 +79,7 @@ const CreatePost = ({ onPostCreated }) => {
             <input
                 name="title"
                 type="text"
-                placeHolder="Title"
+                placeholder="Title"
                 value={title}
                 onChange={e => onChange(e)}
             />

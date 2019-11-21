@@ -32,7 +32,7 @@ const EditPost = ({ post, onPostUpdated }) => {
 
         } else {
             const newPost = {
-                id: post.id(),
+                id: post.id,
                 title: title,
                 body: body,
                 date: moment().toISOString()

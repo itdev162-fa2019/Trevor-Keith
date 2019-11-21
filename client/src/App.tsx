@@ -66,7 +66,7 @@ class App extends React.Component {
   }
 
   onPostCreated = post => {
-    const newPosts = {...this.state.posts, post};
+    const newPosts = [...this.state.posts, post];
 
     this.setState({
       posts: newPosts
@@ -122,7 +122,7 @@ class App extends React.Component {
                 <CreatePost onPostCreated={this.onPostCreated} />
               </Route>
 
-              <Route path="/edit-post">
+              <Route path="/edit-post/:postId">
                 <EditPost post={post} onPostUpdated={this.onPostUpdated} />
               </Route>
 
