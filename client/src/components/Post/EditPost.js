@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { userHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './styles.css';
 
 const EditPost = ({ post, onPostUpdated }) => {
@@ -26,7 +26,7 @@ const EditPost = ({ post, onPostUpdated }) => {
 
     };
 
-    const create = async () => {
+    const update = async () => {
         if(!title || !body) {
             console.log('Title and body are required');
 
@@ -88,7 +88,7 @@ const EditPost = ({ post, onPostUpdated }) => {
                 value={body}
                 onChange={e => onChange(e)}
             ></textarea>
-            <button onClick={() => Update()}>Submit</button>
+            <button onClick={() => update()}>Submit</button>
 
         </div>
 
