@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import uid from 'uuid';
 import moment from 'moment';
 import { userHistory } from 'react-router-dom';
 import './styles.css';
 
-const CreatePost = ({ onPostCreated }) => {
+const EditPost = ({ post, onPostUpdated }) => {
     let history = useHistory();
 
     const [postData, setPostData] = useState({
-        title: '',
-        body: ''
+        title: post.title,
+        body: post.body
         
     });
 
@@ -33,7 +32,7 @@ const CreatePost = ({ onPostCreated }) => {
 
         } else {
             const newPost = {
-                id: uuid.v4(),
+                id: post.id(),
                 title: title,
                 body: body,
                 date: moment().toISOString()
@@ -51,7 +50,7 @@ const CreatePost = ({ onPostCreated }) => {
 
                 //Create the post
                 const body = JSON.stringify(newPost);
-                const res = await axios.post(
+                const res = await axios.put(
                     'http://localhost:5000/api/posts',
                     body,
                     config
@@ -59,7 +58,7 @@ const CreatePost = ({ onPostCreated }) => {
                 );
 
                 //Call the handler and redirect
-                onPostCreated(res.data);
+                onPostUpdated(res.data);
                 history.push('/');
 
             } catch(error) {
@@ -73,7 +72,7 @@ const CreatePost = ({ onPostCreated }) => {
 
     return (
         <div className="form-container">
-            <h2>Create New Post</h2>
+            <h2>Edit Post</h2>
 
             <input
                 name="title"
@@ -86,10 +85,10 @@ const CreatePost = ({ onPostCreated }) => {
                 name="body"
                 cols="30"
                 rows="10"
-                value={body} 
+                value={body}
                 onChange={e => onChange(e)}
             ></textarea>
-            <button onClick={() => create()}>Submit</button>
+            <button onClick={() => Update()}>Submit</button>
 
         </div>
 
@@ -97,4 +96,4 @@ const CreatePost = ({ onPostCreated }) => {
 
 };
 
-export default CreatePost;
+export default EditPost;
