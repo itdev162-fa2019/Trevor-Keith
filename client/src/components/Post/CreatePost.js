@@ -63,8 +63,7 @@ const CreatePost = ({ onPostCreated }) => {
                 history.push('/');
 
             } catch(error) {
-                console.log(error);
-                //console.error(`Error creating post: ${error.response.data}`);
+                console.error(`Error creating post: ${error.response.data}`);
 
             }
 
